@@ -236,12 +236,14 @@ These symbols have fixed meaning across all KCL documents and domain packs. They
 
 **Priority / Severity:**
 
-| Symbol | Meaning |
-|--------|---------|
-| `‼` | Critical / highest priority |
-| `!` | Important / high priority |
-| `·` | Normal / default priority |
-| `…` | Low priority / optional |
+| Symbol | Meaning | ASCII fallback |
+|--------|---------|----------------|
+| `‼` | Critical / highest priority | `!!` |
+| `!` | Important / high priority | `!` |
+| `·` | Normal / default priority | (omit; default) |
+| `…` | Low priority / optional | `...` |
+
+> **Tokenization note.** Several reserved symbols — `‼` (U+203C), `◐` (U+25D0), `·` (U+00B7), `⟨ ⟩` (U+27E8 / U+27E9) — are rare in common BPE vocabularies and may tokenize to multi-byte fallback sequences on some model/tokenizer combinations. When encoding safety-critical content (e.g. priority markers on hard constraints), emitters SHOULD prefer the ASCII fallback forms shown in the tables above, or attach a `§NL["..."]` gloss clarifying the marker's meaning. `∵` and `∴` are well-attested in math corpora and do not need fallbacks.
 
 ---
 
