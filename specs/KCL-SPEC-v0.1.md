@@ -199,7 +199,7 @@ These symbols have fixed meaning across all KCL documents and domain packs. They
 | `∣` | Pipe | Separates tag from slot list inside a frame |
 | `,` | Comma | Separates slots within a frame |
 
-> **Note:** The pipe separator is ASCII `|` (U+007C) in all KCL code. The symbol `∣` (U+2223) is used in tables only due to markdown rendering constraints. They are interchangeable.
+> **Note (normative).** The one and only pipe separator in KCL code is ASCII `|` (U+007C). The Unicode glyph `∣` (U+2223) appears in markdown tables only because a literal `|` would close the table cell; it is **display-only** and has no parsing role. `|` and `∣` are NOT interchangeable — they tokenize differently across BPE vocabularies and have different Unicode categories. **Emitters MUST write U+007C.** Parsers MAY accept U+2223 via NFKC-style normalization as a robustness concession, but SHOULD warn; strict parsers MUST reject it.
 | `:` | Colon | Separates key from value in a slot |
 | `→` | Arrow | Transformation / mapping / state change |
 | `{ }` | Braces | Scope delimiters for sections and nested frames |

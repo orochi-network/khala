@@ -29,7 +29,7 @@ NL escape: `§NL["uncompressed text"]`
 
 Priority: `‼` critical · `!` high · `·` normal · `…` low
 
-> **Note:** Pipe separator is ASCII `|` in code. `∣` appears in tables only for markdown compatibility.
+> **Note (normative):** Emit ASCII `|` (U+007C) only. `∣` (U+2223) appears in markdown tables for display — it is NOT interchangeable with `|` and parsers SHOULD warn on it.
 
 ### Grammar
 
