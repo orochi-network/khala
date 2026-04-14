@@ -35,4 +35,4 @@ Cross-cutting mechanisms: `§CHECKPOINT{...}` (drift prevention), `§COMPRESS{..
 
 ## Authorship
 
-Specs credit Chiro <chiro[at]orochi.network> with a "Multi-Agent Collaborative Design Panel" as co-authors. The panel refers to the specific LLMs used to evaluate experimental results and iterate the spec toward zero-shot parseability: **Gemma 4, Qwen 3.5, Claude Opus 4.6, and Nemotron 3**. Preserve this multi-model framing when editing headers — it is load-bearing for the cross-model compatibility claims (see `[BENCHMARKS|zero_shot_compat]` in the bootstrap).
+Specs credit Chiro <chiro[at]orochi.network> with a "Multi-Agent Collaborative Design Panel" as co-authors. The panel refers to the specific LLMs used to evaluate experimental results and iterate the spec toward zero-shot parseability: **Gemma 4, Qwen 3.5, Claude Opus 4.6, and Nemotron 3**. Preserve this multi-model framing when editing headers — it is load-bearing for the cross-model compatibility claims (see `[BENCHMARKS|zero_shot_targets]` in the bootstrap).
