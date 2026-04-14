@@ -8,6 +8,12 @@ set -euo pipefail
 EVENT=$(cat)
 PROMPT=$(printf '%s' "$EVENT" | jq -r '.prompt // ""')
 
+# Cap the prompt length before running regexes. The hook timeout is 5 s; a
+# multi-MB pasted prompt with greedy `.*` patterns can burn all of it and
+# silently skip enforcement. 16 KiB is more than enough context to detect a
+# leading ```kcl block, a .kcl filename, or an md↔kcl translation intent.
+PROMPT=$(printf '%s' "$PROMPT" | head -c 16384)
+
 NUDGE=""
 
 # Fenced ```kcl code block → kcl-read
