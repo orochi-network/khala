@@ -1,4 +1,4 @@
-# Khala - An Experimentatl Context Language 
+# KCL — Khala Context Language (experimental)
 
 **Khala Context Language (KCL)** — a structured, token-efficient encoding language that compresses LLM context windows by **5–8× with <1% semantic fidelity loss**, plus a Claude Code plugin that puts it to work.
 
