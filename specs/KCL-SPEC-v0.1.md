@@ -864,7 +864,45 @@ KCL frames are context declarations, not executable instructions. However, care 
 
 ---
 
-## 17. Adoption Roadmap
+## 17. Versioning & Compatibility
+
+KCL uses semantic versioning with the spec version declared in `§META{kcl:X.Y}`.
+
+### 17.1 Parser compatibility rules
+
+| Situation | Required parser behavior |
+|-----------|--------------------------|
+| Document `kcl:X.Y`, parser understands `X.Y` | Accept. |
+| Document `kcl:X.Y`, parser understands `X.Z` where `Z > Y` (forward) | Accept; treat as a v`X.Y` document; newer fields set to their v`X.Y` defaults. |
+| Document `kcl:X.Y`, parser understands only `X.Z` where `Z < Y` (backward) | Accept if every section in the document is recognized; warn on any unknown `§SECTION{}`. |
+| Document `kcl:X.Y` contains unknown `§SECTION{}` | Ignore the section (forward compatibility). |
+| Document `kcl:X.Y` contains unknown directive `@unknown(...)` | Ignore the directive; continue processing. |
+| Document `kcl:X.Y` contains unknown **required** marker (reserved prefix `§!REQUIRED_`) | Reject the document — refusing is safer than mis-interpreting. |
+| Document `kcl:X.Y` with `Y` parser understands nothing of `X` (major change) | Reject. |
+
+In short: **ignore unknown optional sections, reject unknown required sections.** This mirrors CBOR tag handling and Protocol Buffers field-number discipline.
+
+### 17.2 Domain-pack versioning
+
+Domain packs version independently of the spec (`§USE coding_v2`). Packs MAY add, deprecate, or redefine symbols across major versions. When a document imports a pack, the pack's version at document-encode time is part of the document's semantics; encoders SHOULD NOT rewrite `§USE` version tags without re-encoding the body.
+
+### 17.3 Breaking-change policy
+
+A change is **breaking** (and requires a major-version bump) if it:
+
+- Removes or renames a reserved symbol.
+- Changes the meaning of an existing frame tag, directive, or trust marker.
+- Tightens a previously-permissive grammar production such that existing valid documents become invalid.
+
+Non-breaking changes (minor-version bump) include: adding new frame tags, adding new directives, adding new `§META` keys with defaults, and clarifying but not changing existing rules.
+
+### 17.4 Deprecation
+
+Symbols / frame types scheduled for removal MUST be marked with `✗` in the spec and MUST remain parseable for at least one minor version before removal. Deprecation announcements belong in `CHANGELOG.md`.
+
+---
+
+## 18. Adoption Roadmap
 
 | Phase | Timeline | Milestone |
 |-------|----------|-----------|
@@ -875,7 +913,7 @@ KCL frames are context declarations, not executable instructions. However, care 
 
 ---
 
-## 18. Appendix A — Quick Reference Card
+## 19. Appendix A — Quick Reference Card
 
 ### Structure
 
@@ -931,7 +969,7 @@ KCL frames are context declarations, not executable instructions. However, care 
 
 ---
 
-## 19. Appendix B — Domain Pack Registry
+## 20. Appendix B — Domain Pack Registry
 
 | Pack ID | Domain | Key Aliases | Status |
 |---------|--------|-------------|--------|
@@ -946,7 +984,7 @@ KCL frames are context declarations, not executable instructions. However, care 
 
 ---
 
-## 20. License
+## 21. License
 
 KCL is published as an open specification under the **Creative Commons Attribution 4.0 International (CC BY 4.0)** license. Implementations may use any software license.
 
