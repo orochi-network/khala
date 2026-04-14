@@ -140,7 +140,6 @@ IMPORTS       ::= '§USE' PACK_ID
 BODY          ::= FRAME | DELTA | DIRECTIVE | CHECKPOINT | NL_ESCAPE | HISTORY | COMPRESS
 
 FRAME         ::= '[' TAG '|' SLOT_LIST ']'
-                | '[' TAG ':' VALUE ']'
 SLOT_LIST     ::= SLOT (',' SLOT)*
 SLOT          ::= KEY ':' VALUE
 
