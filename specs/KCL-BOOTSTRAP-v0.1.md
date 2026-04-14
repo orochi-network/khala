@@ -102,16 +102,29 @@ Types: `str` `int` `num` `bool` `obj` `arr` `any` `enum[a,b]` — `?` = optional
     purpose:entity_types+shortcodes+tools],
   tier_1:[name:structured_semantic_frames, syntax:"[TAG|slot:val]",
     purpose:predicate_argument_structures],
-  tier_2:[name:delta_encoding, syntax:"Δ[ref|changes]",
-    purpose:incremental_state_changes]
+  tier_2:[name:delta_encoding, syntax:"Δ[#id|changes]",
+    purpose:incremental_state_changes,
+    ref_resolution:"#<id> first, #<TAG> fallback when unambiguous, else error"]
+]
+
+[TOKENIZATION|
+  bare_token:"no : , ] } | → \" or whitespace",
+  quoted_string:"required for values containing any reserved char (paths with :, URLs, version strings, dimensions, prose)",
+  ascii_pipe:"U+007C is the only normative separator; U+2223 is display-only",
+  parser_rule:"reject malformed bare tokens rather than disambiguate"
 ]
 
 [HEADER_BLOCKS|
   META:[keys:{kcl:str, model:str?, session:str, ts:ISO-8601,
     compress_level:enum[conservative,standard,aggressive],
     history_depth:obj, checkpoint_interval:int=50}],
-  TRUST:[markers:{✓:verified, ?:uncertain, ~:user_claim,
-    ✗:deprecated, ◐:partial}],
+  TRUST:[markers:{
+    ✓:"verified; treat as non-negotiable fact",
+    ?:"uncertain; flag in output, avoid irreversible actions",
+    ~:"user-claimed; reason about, not ground truth",
+    ✗:"deprecated; MUST NOT act on",
+    ◐:"partial; MUST pair with when:/scope: slot, apply only when scope holds"
+  }],
   ONTO:[sections:{entities:shortcode_map, types:enum_defs, aliases:abbreviations}],
   TOOLS:[syntax:"name(param:type=default)→ReturnType \"desc\"",
     compression:15-25×_vs_json_schema]
@@ -214,20 +227,32 @@ Types: `str` `int` `num` `bool` `obj` `arr` `any` `enum[a,b]` — `?` = optional
   delta_limit:"chains >100 without checkpoint are unreliable"
 ]
 
+[VERSIONING|
+  meta:"§META{kcl:X.Y} declares spec version",
+  forward_compat:"unknown §SECTION{} ignored; unknown @directive ignored",
+  required_reject:"unknown §!REQUIRED_* MUST cause parser rejection",
+  breaking_bump:"removing/renaming/redefining reserved symbols or tags → major version",
+  domain_packs:"pack versions independent of spec version (§USE pack_vN)",
+  deprecation:"mark ✗ and retain ≥1 minor version before removal"
+]
+
+§CLAIM?[benchmarks:"illustrative v0.1 design targets, NOT measured results — see specs/BENCHMARKS.md"]
 [BENCHMARKS|
-  prototype_results:{
+  status:illustrative,
+  caveat:"no harness, sample size, CI, or NL-with-section-headers control; tokens↔cost delta is tautological; adherence uplift confounded with prompt-engineering effect",
+  prototype_targets:{
     tokens:{raw:48200, kcl:9100, delta:"-81%"},
     accuracy:{raw:94.2%, kcl:93.8%, delta:"-0.4%"},
     instruction_adherence:{raw:91.0%, kcl:93.5%, delta:"+2.5%"},
-    latency_ttft:{raw:3.2s, kcl:0.8s, delta:"-75%"},
+    latency_ttft:{raw:"3.2s", kcl:"0.8s", delta:"-75%"},
     cost:{raw:"$0.48", kcl:"$0.09", delta:"-81%"}
   },
-  zero_shot_compat:{
-    claude_3_5⊕:97.2%,
-    gpt_4⊕:96.8%,
-    gemini_1_5⊕:95.1%,
-    llama_3_1_70b:93.4%,
-    mistral_large:94.7%
+  zero_shot_targets:{
+    claude_3_5⊕:"≥97%",
+    gpt_4⊕:"≥96%",
+    gemini_1_5⊕:"≥95%",
+    llama_3_1_70b:"≥93%",
+    mistral_large:"≥94%"
   }
 ]
 

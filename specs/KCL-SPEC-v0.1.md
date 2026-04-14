@@ -458,14 +458,16 @@ Encodes factual context, constraints, and environmental state.
 ```kcl
 [CTX|
   project:auth_service,
-  lang:python:3.12,
-  framework:FastAPI:0.104,
-  db:PostgreSQL:16,
-  deploy:AWS:lambda,
+  lang:"python:3.12",
+  framework:"FastAPI:0.104",
+  db:"PostgreSQL:16",
+  deploy:"AWS:lambda",
   team_size:4,
   deadline:2026-05-01
 ]
 ```
+
+Values containing `:` (such as `python:3.12`, `FastAPI:0.104`, `AWS:lambda`) MUST be quoted per the LITERAL tokenization rule in §3.1.
 
 ### 6.4 Task Frame
 
@@ -574,7 +576,7 @@ To prevent semantic drift from accumulating delta errors, KCL requires periodic 
   §META{kcl:0.1, session:a1b2c3, ts:2026-04-14T11:30Z, turn:50}
   §ROLE[sr_dev:python]
   §STYLE[clean,documented,pep8]
-  [CTX|project:auth_service, lang:python:3.12, framework:FastAPI:0.104]
+  [CTX|project:auth_service, lang:"python:3.12", framework:"FastAPI:0.104"]
   [STATE|
     implemented:[oauth_flow:✓, refresh_tokens:✓, logging:✓],
     pending:[rate_limiting, integration_tests],
@@ -641,7 +643,7 @@ opportunities' not 'problems.'"]
   salient:["load_balancer","api_gateway","database_cluster"],
   spatial:{lb:top_center, api:middle, db:bottom},
   text_in_image:["AWS ALB","FastAPI","PostgreSQL"],
-  resolution:1920x1080
+  resolution:"1920x1080"
 ]
 ```
 
@@ -967,7 +969,7 @@ Symbols / frame types scheduled for removal MUST be marked with `✗` in the spe
 | `§TOOLS{name(p:t)→R}` | Define tool signatures |
 | `§ALWAYS[x]` `§NEVER[y]` | Behavioral constraints |
 | `§PREFER[x>y]` | Soft preferences |
-| `§ON:trigger[action]` | Conditional behavior |
+| `§ON[trigger:T, action:A, then:N]` | Conditional behavior |
 | `§NL["free text"]` | Natural language escape |
 | `§CHECKPOINT{...}` | Full state snapshot |
 | `§USE pack_v1` | Import domain pack |
