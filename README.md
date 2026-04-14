@@ -2,7 +2,7 @@
 
 **Khala Context Language (KCL)** — a structured, token-efficient encoding language that compresses LLM context windows by **5–8× with <1% semantic fidelity loss**, plus a Claude Code plugin that puts it to work.
 
-KCL is not a programming language. It is a coordination protocol for latent spaces — a text format optimized for how transformers attend to and retrieve information, not for how humans read prose.
+KCL is not a programming language and not for humans to read fluently. It is a text format optimized for how transformers attend to and retrieve information — structured markers instead of prose, typed slots instead of bullet points, deltas instead of re-stating full context on every turn.
 
 ---
 
