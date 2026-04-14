@@ -794,17 +794,21 @@ Any LLM claiming KCL compliance must demonstrate:
 2. **Semantic reconstruction ≥ 93%** measured by task performance parity with uncompressed NL context.
 3. **Round-trip stability** — encoding then decoding the same context produces semantically equivalent output across 3 consecutive round-trips.
 
-### 14.2 Zero-Shot Compatibility
+### 14.2 Zero-Shot Compatibility (illustrative targets — **NOT measured**)
 
-Tested zero-shot (with bootstrap preamble only, no fine-tuning):
+> The numbers below describe the compatibility envelope KCL v0.1 is *designed to achieve* across the listed model families with the bootstrap preamble only. They are not measurements. The implausibly tight 93–97% range across architectures as different as Llama-70B and Claude 3.5+ would, in a real evaluation, indicate either a ceiling-effect metric or a cherry-picked subset. See `specs/BENCHMARKS.md` for definitions and the planned v0.2 harness.
 
-| Model Family | Parse Accuracy | Semantic Reconstruction | Notes |
-|-------------|----------------|------------------------|-------|
-| Claude 3.5+ | 97.2% | 96.1% | Excellent on code + structured frames |
-| GPT-4+ | 96.8% | 95.4% | Strong overall, slightly weaker on nested deltas |
-| Gemini 1.5+ | 95.1% | 93.8% | Good, occasional issues with epistemic markers |
-| Llama 3.1+ (70B) | 93.4% | 91.2% | Adequate, benefits from fine-tuning |
-| Mistral Large | 94.7% | 92.9% | Good, especially with domain packs |
+Operational definitions the v0.2 harness will use:
+- **Parse Accuracy** = fraction of KCL test documents for which the model's reconstruction preserves all tagged slots under a published equivalence relation (tag equality, value-string NFKC equality for literals, numeric tolerance ±0 for scalars).
+- **Semantic Reconstruction** = task-performance parity ratio between NL-prompted baseline and KCL-prompted condition on IFEval+BBH subsets, judged by a panel with reported κ.
+
+| Model Family | Target Parse Accuracy | Target Semantic Reconstruction | Notes |
+|-------------|-----------------------|---------------------------------|-------|
+| Claude 3.5+ / Opus 4.6 | ≥ 97% | ≥ 96% | Design target: excellent on code + structured frames |
+| GPT-4+ | ≥ 96% | ≥ 95% | Design target: strong overall, weaker on nested deltas |
+| Gemini 1.5+ | ≥ 95% | ≥ 93% | Design target: occasional issues with epistemic markers |
+| Llama 3.1+ (70B) | ≥ 93% | ≥ 91% | Design target: benefits from fine-tuning |
+| Mistral Large | ≥ 94% | ≥ 92% | Design target: especially with domain packs |
 
 ### 14.3 Fine-Tuning Path (Optional)
 
