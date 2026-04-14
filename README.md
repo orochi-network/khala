@@ -99,6 +99,8 @@ claude plugin marketplace add https://github.com/orochi-network/khala
 claude plugin install khala@khala
 ```
 
+The `khala@khala` syntax is `<plugin-name>@<marketplace-name>` — both happen to be `khala` because this repo ships a single-plugin marketplace. It is not a typo.
+
 Once installed, the skills fire automatically on matching phrasings (`read this kcl`, `save as .kcl`, `translate notes.md to kcl`, …) or can be invoked explicitly:
 
 ```
