@@ -45,17 +45,19 @@ Four design pillars:
 
 Fewer tokens, faster first-token, lower cost — and instruction adherence *improves* because the structure is more attention-legible than prose.
 
-### Zero-shot cross-model compatibility
+### Zero-shot cross-model compatibility (illustrative targets)
 
-| Model | Parse accuracy |
-|-------|---------------:|
-| Claude 3.5 | 97.2% |
-| GPT-4 | 96.8% |
-| Gemini 1.5 | 95.1% |
-| Mistral Large | 94.7% |
-| Llama 3.1 70B | 93.4% |
+Compatibility targets KCL v0.1 aims for across major model families:
 
-No fine-tuning required. The bootstrap preamble teaches any major LLM to parse KCL in ~50 tokens.
+| Model family | Target parse accuracy |
+|--------------|----------------------:|
+| Claude 3.5 / Opus 4.6 | ≥ 97% |
+| GPT-4 | ≥ 96% |
+| Gemini 1.5 | ≥ 95% |
+| Mistral Large | ≥ 94% |
+| Llama 3.1 70B | ≥ 93% |
+
+Actual v0.1 design evaluation was performed on the panel listed under [Authorship](#authorship) — the table above reflects compatibility *goals* across the broader model landscape, not a reproducible benchmark. The bootstrap preamble is designed to teach any major LLM to parse KCL in ~50 tokens without fine-tuning.
 
 ### Compression by content type
 
