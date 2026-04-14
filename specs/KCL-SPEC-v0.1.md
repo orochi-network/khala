@@ -688,7 +688,7 @@ Different content types and different models tolerate different compression leve
 §COMPRESS{
   code:aggressive,
   instructions:conservative,
-  history:moderate,
+  history:standard,
   tool_defs:aggressive,
   user_data:conservative
 }
@@ -706,7 +706,7 @@ Different content types and different models tolerate different compression leve
 §COMPRESS{
   @model:claude-opus{ code:aggressive, history:aggressive }
   @model:gpt-4{ code:standard, history:aggressive }
-  @model:default{ code:standard, history:moderate }
+  @model:default{ code:standard, history:standard }
 }
 ```
 
