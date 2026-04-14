@@ -87,7 +87,7 @@ Types: `str` `int` `num` `bool` `obj` `arr` `any` `enum[a,b]` — `?` = optional
 ]
 
 [PRINCIPLES|
-  P1:attention_maximization∵"structured markers get 3.2× higher attention weight",
+  P1:attention_maximization∵"structured markers expected to attract stronger attention than prose; magnitude is an open empirical question",
   P2:deterministic_decompression∵"any LLM reconstructs equivalent meaning",
   P3:incremental_encoding∵"append via deltas without re-encoding",
   P4:self_describing∵"bootstrap preamble makes docs self-contained",

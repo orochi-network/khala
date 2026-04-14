@@ -24,7 +24,7 @@ Natural-language system prompts and tool definitions waste tokens the model isn'
 
 Four design pillars:
 
-1. **Structured markers receive ~3.2× higher attention weight** than equivalent natural language.
+1. **Attention maximization** — every token is designed to be a high-signal anchor. Structured markers drawn from math/code/markup corpora are expected to attract stronger attention than equivalent natural-language prose; the precise magnitude is an open empirical question (see [Benchmarks](#benchmarks) caveats).
 2. **Incremental encoding** — append context via deltas without re-encoding the full state.
 3. **Self-describing** — the bootstrap preamble makes any KCL document self-contained; no external schema required.
 4. **Graceful degradation** — partial corruption still parses; frames are independently meaningful.

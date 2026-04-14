@@ -36,7 +36,7 @@ This is a complete, parseable context payload.
 
 | # | Principle | Description |
 |---|-----------|-------------|
-| P1 | **Attention Maximization** | Every token must be a high-signal anchor. Structured markers receive 3.2× higher average attention weight than equivalent natural language. |
+| P1 | **Attention Maximization** | Every token should be a high-signal anchor. Structured markers drawn from math/code/markup corpora are expected to receive stronger model attention than prose; the exact magnitude is an open empirical question and SHOULD NOT be cited as a measured constant without a published methodology. |
 | P2 | **Deterministic Decompression** | Any LLM should reconstruct semantically equivalent meaning from the same KCL input. |
 | P3 | **Incremental Encoding** | Context can be appended via deltas without re-encoding the full state. |
 | P4 | **Self-Describing** | No external schema required. The bootstrap preamble + ontology header makes any KCL document self-contained. |
