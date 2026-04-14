@@ -72,7 +72,7 @@ Types: `str` `int` `num` `bool` `obj` `arr` `any` `enum[a,b]` — `?` = optional
 
 §ONTO{
   entities:{U:user, A:assistant, S:system, P:preamble},
-  type_shorts:{str:string, int:integer, num:float, bool:boolean,
+  types:{str:string, int:integer, num:float, bool:boolean,
     obj:object, arr:array, any:any_type},
   aliases:{fn:function, err:error, ret:return, cfg:config,
     dep:dependency, env:environment, req:request, res:response}
