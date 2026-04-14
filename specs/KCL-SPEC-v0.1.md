@@ -225,13 +225,13 @@ These symbols have fixed meaning across all KCL documents and domain packs. They
 
 **Epistemic Markers:**
 
-| Symbol | Meaning |
-|--------|---------|
-| `✓` | Verified / ground truth |
-| `✗` | Deprecated / known false |
-| `?` | Uncertain / unverified |
-| `~` | User-claimed / subjective |
-| `◐` | Partially true |
+| Symbol | Meaning | Operational definition |
+|--------|---------|------------------------|
+| `✓` | Verified / ground truth | Confirmed by an authoritative source cited in the same context. Model SHOULD treat as non-negotiable fact. |
+| `✗` | Deprecated / known false | Previously true, now invalid. Model MUST NOT act on deprecated facts even if still semantically coherent. |
+| `?` | Uncertain / unverified | No source; may or may not be current. Model SHOULD flag uncertainty in output and avoid irreversible actions. |
+| `~` | User-claimed / subjective | Asserted by the user without independent verification. Model SHOULD treat as input to reason about, not ground truth. |
+| `◐` | Partially true | True under some conditions but not all. Emitters MUST pair `◐` with a `when:` / `scope:` slot describing the conditions; model SHOULD treat as conditional fact and apply only when the scope holds. |
 
 **Priority / Severity:**
 
@@ -421,7 +421,7 @@ Defines the assistant's persona and behavioral constraints.
 |---------|---------|
 | `§ALWAYS[x]` | Always do x |
 | `§NEVER[x]` | Never do x |
-| `§PREFER[x>y]` | Prefer x over y when choice exists |
+| `§PREFER[x>y]` | **Soft ordering** — when choosing between `x` and `y`, pick `x`; MAY override `x` with `y` if the task explicitly requires it or `§ALWAYS` forbids `x`. The `>` is a strict soft order: `§PREFER[x>y>z]` means `x > y > z` with transitivity. Never treat `§PREFER` as a hard constraint — use `§ALWAYS`/`§NEVER` for that. |
 | `§ON[trigger:T, action:A, then:N]` | When trigger T occurs, perform A, then follow up with N |
 
 ### 6.2 Tone Frame
