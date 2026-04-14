@@ -146,6 +146,15 @@ Every behavioral constraint is preserved as a structured frame. `/khala:kcl-tran
 
 ---
 
+## Next steps
+
+1. **Install** the plugin using the commands above.
+2. **Try** `/khala:kcl-translate` on any markdown system-prompt or notes file — the cheapest way to see the compression in action.
+3. **Read** `specs/KCL-SPEC-v0.1.md` if you want the grammar, or `specs/KCL-BOOTSTRAP-v0.1.md` for the ~2,200-token self-teaching version.
+4. **Track progress** in [`CHANGELOG.md`](CHANGELOG.md); contributions welcome per [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+---
+
 ## Authorship
 
 **Chiro** — `chiro@orochi.network` · [Orochi Network](https://orochi.network)
