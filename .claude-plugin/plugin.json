@@ -1,0 +1,12 @@
+{
+  "name": "khala",
+  "version": "0.1.0",
+  "description": "KCL (Khala Context Language) toolkit — read, write, and translate KCL-encoded LLM context",
+  "author": {
+    "name": "Chiro",
+    "email": "chiro@orochi.network"
+  },
+  "homepage": "https://github.com/orochi-network/khala",
+  "license": "Apache-2.0",
+  "hooks": "./hooks/hooks.json"
+}

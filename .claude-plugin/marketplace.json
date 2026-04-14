@@ -1,0 +1,32 @@
+{
+  "name": "khala",
+  "owner": {
+    "name": "Chiro",
+    "email": "chiro@orochi.network",
+    "url": "https://github.com/orochi-network"
+  },
+  "plugins": [
+    {
+      "name": "khala",
+      "source": "./",
+      "description": "KCL (Khala Context Language) toolkit — read, write, and translate KCL-encoded LLM context. Ships kcl-read, kcl-write, kcl-translate skills plus enforcement hooks that route .kcl / ```kcl workflows through the bundled v0.1 bootstrap spec.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Chiro",
+        "email": "chiro@orochi.network"
+      },
+      "homepage": "https://github.com/orochi-network/khala",
+      "license": "Apache-2.0",
+      "category": "context-engineering",
+      "keywords": [
+        "kcl",
+        "khala",
+        "context-compression",
+        "llm",
+        "prompt-engineering",
+        "skills",
+        "orochi-network"
+      ]
+    }
+  ]
+}
