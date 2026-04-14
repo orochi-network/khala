@@ -830,15 +830,19 @@ For production deployments seeking maximum compression:
 | **Encode Latency (EL)** | Time to compress NL → KCL | < 500ms for 10k tokens |
 | **Decode Overhead (DO)** | Additional processing time for KCL vs NL | < 5% |
 
-### 15.2 Benchmark Results (Prototype)
+### 15.2 Benchmark Results (Illustrative design targets — **NOT measured**)
 
-| Metric | Raw NL Context | KCL Compressed | Delta |
-|--------|---------------|----------------|-------|
+> The table below states the performance envelope KCL v0.1 is *designed to hit*. It is not a reproducible experimental result: no harness, sample size, confidence interval, or prose-with-section-headers control has been published. The token-count and cost deltas are tautologically linked (`$/token` identical on both sides); the accuracy, adherence, and latency figures are plausible design targets that require independent measurement before citation.
+
+| Metric | Raw NL Context | KCL Compressed | Delta (target) |
+|--------|---------------|----------------|----------------|
 | Tokens used | 48,200 | 9,100 | **-81%** |
 | Task accuracy | 94.2% | 93.8% | -0.4% |
 | Instruction adherence | 91.0% | 93.5% | **+2.5%** |
 | TTFT latency | 3.2s | 0.8s | **-75%** |
 | Cost (API) | $0.48 | $0.09 | **-81%** |
+
+A reproducible evaluation harness — public task suite, multi-model judges, NL-with-section-headers baseline, and per-metric confidence intervals — is planned for v0.2 and will be published as `specs/BENCHMARKS.md`.
 
 ---
 

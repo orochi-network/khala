@@ -33,17 +33,19 @@ Four design pillars:
 
 ## Benchmarks
 
-### Prototype results (v0.1)
+> **These numbers are illustrative v0.1 design targets, not measured results.** KCL v0.1 ships without a published evaluation harness, sample-size reporting, confidence intervals, or a prose-with-section-headers control. Treat the figures below as the performance envelope KCL is *aiming for*; a reproducible benchmark suite is [planned](#next-steps) for v0.2. Do not cite these as measurements in downstream work.
 
-| Metric | Raw NL | KCL | Δ |
-|--------|-------:|----:|---:|
+### Prototype targets (v0.1, illustrative)
+
+| Metric | Raw NL | KCL (target) | Δ (target) |
+|--------|-------:|-------------:|-----------:|
 | Tokens | 48,200 | 9,100 | **−81%** |
 | Accuracy | 94.2% | 93.8% | −0.4% |
 | Instruction adherence | 91.0% | 93.5% | **+2.5%** |
 | Latency (TTFT) | 3.2s | 0.8s | **−75%** |
 | Cost per session | $0.48 | $0.09 | **−81%** |
 
-Fewer tokens, faster first-token, lower cost — and instruction adherence *improves* because the structure is more attention-legible than prose.
+The directional claim — fewer tokens, faster first-token, lower cost — is defensible from first principles (tokens drive both). The adherence uplift is plausible (structured prompts often outperform prose) but is *equally consistent* with a prompt-engineering confound: a well-formatted KCL prompt beats a poorly-formatted NL baseline. An honest v0.2 comparison needs an NL-with-section-headers control.
 
 ### Zero-shot cross-model compatibility (illustrative targets)
 
