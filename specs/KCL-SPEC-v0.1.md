@@ -733,7 +733,7 @@ Different content types and different models tolerate different compression leve
 §NEVER[global_vars,mutable_defaults,bare_except,class_components]
 ```
 
-**Compression: 4.3× | Semantic loss: 0%**
+**Compression: 4.3× | Task-equivalent (structural slots preserved; rhetorical framing and prose ordering are *not* preserved — `md → kcl → md` is not bitwise-lossless)**
 
 ### 13.2 Tool Registry Compression
 
@@ -751,7 +751,7 @@ Different content types and different models tolerate different compression leve
 }
 ```
 
-**Compression: 25× | Semantic loss: 0%**
+**Compression: 25× | Lossless for typed signatures and return types. Complex JSON-Schema constraints (`enum`, `pattern`, `oneOf`, `$ref`, per-param descriptions) are *not* preserved by this form and require a `§TOOLS` extension slot or `§NL[...]` escape.**
 
 ### 13.3 Multi-Turn Conversation Compression
 
