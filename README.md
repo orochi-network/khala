@@ -63,13 +63,13 @@ Actual v0.1 design evaluation was performed on the panel listed under [Authorshi
 
 ### Compression by content type
 
-| Content | Ratio | Fidelity |
-|---------|:-----:|----------|
-| System prompts | 3–5× | lossless |
-| Tool definitions | 15–25× | lossless |
-| Conversation history | 10–25× | lossy (controlled) |
+| Content | Ratio (target) | Fidelity |
+|---------|:--------------:|----------|
+| System prompts | 3–5× | lossless for role/style/constraint frames |
+| Tool definitions | 15–25× | lossless for typed signatures (`name(p:type=default)→R`); complex JSON-Schema constraints — `enum`, `pattern`, `oneOf`, `$ref`, per-param descriptions — require `§TOOLS{...}` extension slots or an `§NL[...]` escape |
+| Conversation history | 10–25× | lossy (controlled) — full turns lossless, summaries lossy by design |
 | Document context | 5–10× | lossy (key-preserved) |
-| Combined typical | **5–8×** | <1% accuracy loss |
+| Combined typical | **5–8×** | <1% task-accuracy target (unverified, see caveats above) |
 
 ---
 

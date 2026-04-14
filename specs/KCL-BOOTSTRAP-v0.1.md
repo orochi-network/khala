@@ -232,8 +232,8 @@ Types: `str` `int` `num` `bool` `obj` `arr` `any` `enum[a,b]` — `?` = optional
 ]
 
 [COMPRESSION_TARGETS|
-  system_prompts:{ratio:"3-5×", fidelity:lossless},
-  tool_definitions:{ratio:"15-25×", fidelity:lossless},
+  system_prompts:{ratio:"3-5×", fidelity:"lossless for role/style/constraint frames"},
+  tool_definitions:{ratio:"15-25×", fidelity:"lossless for typed signatures; complex JSON-Schema constraints (enum/pattern/oneOf/$ref/per-param desc) require §TOOLS extension or §NL escape"},
   conversation_history:{ratio:"10-25×", fidelity:lossy_controlled},
   document_context:{ratio:"5-10×", fidelity:lossy_key_preserved},
   combined_typical:{ratio:"5-8×", fidelity:"<1% accuracy loss"}
