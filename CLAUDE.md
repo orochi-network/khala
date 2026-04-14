@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This repository contains **specification documents only** — no source code, build system, tests, or package manifests. It defines **KCL (Khala Context Language) v0.1**, a structured encoding language for compressing LLM context windows by 5–8× with <1% semantic fidelity loss.
 
 - `specs/KCL-SPEC-v0.1.md` — the full normative specification (~30KB).
-- `specs/KCL-BOOTSTRAP-v0.1.md` — a two-stage self-teaching loader (Stage 1 teaches KCL in ~700 tokens; Stage 2 delivers the full spec expressed in KCL).
+- `specs/KCL-BOOTSTRAP-v0.1.md` — a two-stage self-teaching loader (Stage 1 teaches KCL in ~700 tokens; Stage 2 delivers the full spec expressed in KCL in ~1,500 tokens; ~2,200 tokens combined).
 - `LICENSE` — CC-BY-4.0 license text.
 
 There are no commands to run. Work in this repo is editing markdown specs.
