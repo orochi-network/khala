@@ -33,7 +33,7 @@ Four design pillars:
 
 ## Benchmarks
 
-> **These numbers are illustrative v0.1 design targets, not measured results.** KCL v0.1 ships without a published evaluation harness, sample-size reporting, confidence intervals, or a prose-with-section-headers control. Treat the figures below as the performance envelope KCL is *aiming for*; a reproducible benchmark suite is [planned](#next-steps) for v0.2. Do not cite these as measurements in downstream work.
+> **These numbers are illustrative v0.1 design targets, not measured results.** KCL v0.1 ships without a published evaluation harness, sample-size reporting, confidence intervals, or a prose-with-section-headers control. Treat the figures below as the performance envelope KCL is *aiming for*; see [`specs/BENCHMARKS.md`](specs/BENCHMARKS.md) for the methodology gap and the planned v0.2 harness. Do not cite these as measurements in downstream work.
 
 ### Prototype targets (v0.1, illustrative)
 
