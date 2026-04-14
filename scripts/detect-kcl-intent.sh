@@ -50,6 +50,7 @@ if [[ -z "$NUDGE" ]]; then
 fi
 
 jq -nc --arg ctx "$NUDGE" '{
+  continue: true,
   hookSpecificOutput: {
     hookEventName: "UserPromptSubmit",
     additionalContext: $ctx

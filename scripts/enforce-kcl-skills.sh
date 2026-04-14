@@ -52,6 +52,7 @@ case "$TOOL" in
 esac
 
 jq -nc --arg ctx "$MSG" '{
+  continue: true,
   hookSpecificOutput: {
     hookEventName: "PreToolUse",
     additionalContext: $ctx
