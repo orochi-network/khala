@@ -26,8 +26,12 @@ if printf '%s' "$PROMPT" | grep -qE '§[A-Z_]+|Δ\[|\[[A-Z_]+\|'; then
   NUDGE+="Inline KCL markers (§, Δ, or [TAG|...]) appear in the prompt. Invoke khala:kcl-read to interpret them.\n"
 fi
 
-# Mention of a .kcl file path → kcl-read
-if printf '%s' "$PROMPT" | grep -qE '[[:alnum:]_./-]+\.kcl\b'; then
+# Mention of a .kcl file path → kcl-read. Anchor to a word boundary or path-like
+# prefix to avoid matching URLs (https://attacker/foo.kcl) and inline-word
+# coincidences. The prompt is first scrubbed of scheme://host[/…] spans so a
+# .kcl living inside a URL does not fire the nudge.
+KCL_SCAN=$(printf '%s' "$PROMPT" | sed -E 's#[a-zA-Z][a-zA-Z0-9+.-]*://[^[:space:]]+##g')
+if printf '%s' "$KCL_SCAN" | grep -qE '(^|[[:space:]"'\''`(])[~./a-zA-Z0-9_-][[:alnum:]_./-]*\.kcl\b'; then
   NUDGE+="The prompt references a .kcl file. Invoke khala:kcl-read to load it; do not Read it raw.\n"
 fi
 
