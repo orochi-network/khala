@@ -51,7 +51,7 @@ Types: `str` `int` `num` `bool` `obj` `arr` `any` `enum[a,b]` — `?` = optional
 §STYLE[traits]                  — output style
 §ALWAYS[x] §NEVER[y]           — hard constraints
 §PREFER[x>y]                   — soft preference
-§ON:trigger[action→then:next]   — conditional
+§ON[trigger:X, action:Y, then:Z]   — conditional
 §TONE[formality:0-1, ...]      — grounded scales
 §HISTORY{ ⟨T1-T5⟩ SUMMARY[...] ⟨T6⟩ U:FRAME }
 §CHECKPOINT{ ...full state... } — drift prevention
@@ -135,7 +135,7 @@ Types: `str` `int` `num` `bool` `obj` `arr` `any` `enum[a,b]` — `?` = optional
   always:§ALWAYS[constraints]∵"hard positive rules",
   never:§NEVER[constraints]∵"hard negative rules",
   prefer:§PREFER[x>y]∵"soft preferences with ordering",
-  on:§ON:trigger[action→then:next]∵"conditional behavior",
+  on:§ON[trigger:X, action:Y, then:Z]∵"conditional behavior",
   tone:§TONE[formality:0-1,technicality:0-1,humor:0-1,
     verbosity:0-1,confidence:0-1]∵"grounded behavioral scales",
   context:"[CTX|project,lang,framework,db,deploy]",

@@ -410,8 +410,8 @@ Defines the assistant's persona and behavioral constraints.
 §PREFER[functional>OOP, composition>inheritance]
 §ALWAYS[type_hints, docstrings, error_handling]
 §NEVER[global_vars, bare_except, print_debug]
-§ON:bugfix[explain_root→then:fix]
-§ON:review[security_first→then:perf→then:style]
+§ON[trigger:bugfix, action:explain_root, then:fix]
+§ON[trigger:review, action:security_first, then:[perf, style]]
 ```
 
 **Behavioral Modifier Syntax:**
@@ -421,7 +421,7 @@ Defines the assistant's persona and behavioral constraints.
 | `§ALWAYS[x]` | Always do x |
 | `§NEVER[x]` | Never do x |
 | `§PREFER[x>y]` | Prefer x over y when choice exists |
-| `§ON:trigger[action]` | When trigger occurs, perform action |
+| `§ON[trigger:T, action:A, then:N]` | When trigger T occurs, perform A, then follow up with N |
 
 ### 6.2 Tone Frame
 
@@ -728,8 +728,8 @@ Different content types and different models tolerate different compression leve
 §STYLE[clean,documented]
 §ALWAYS[pep8,type_hints,pytest+fixtures,eslint_recommended,strict_types,react_hooks]
 §PREFER[functional>OOP∵pragmatic, concise>verbose, code>explanation]
-§ON:bugfix[root_cause(1-2_sentences)→minimal_fix]
-§ON:uncertain[state_uncertainty∵never_guess]
+§ON[trigger:bugfix, action:"root_cause(1-2_sentences)", then:minimal_fix]
+§ON[trigger:uncertain, action:state_uncertainty, ∵:never_guess]
 §NEVER[global_vars,mutable_defaults,bare_except,class_components]
 ```
 
