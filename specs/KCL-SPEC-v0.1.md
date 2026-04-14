@@ -109,8 +109,15 @@ The primary content encoding. Replaces natural language paragraphs with predicat
 Subsequent messages encode only changes from prior state, using the delta operator `Δ`.
 
 ```kcl
-Δ[ref:frame_id | slot.key:old→new, ⊕slot:added_value, ⊖slot:removed_value]
+Δ[#frame_id | slot.key:old→new, ⊕slot:added_value, ⊖slot:removed_value]
 ```
+
+**Frame identity (normative).** Every frame MAY carry an optional `id:<IDENTIFIER>` slot which assigns it a stable reference name. A delta's `REF` resolves against prior frames in this order:
+
+1. `#<id>` — exact match on a frame's `id:` slot. Unambiguous when IDs are unique in the document.
+2. `#<TAG>` — when no `id:` is declared, match the most recent frame whose TAG equals the identifier. If multiple untagged frames share a TAG and the author needs to reference an earlier one, the frames MUST be given explicit `id:` slots.
+
+A `REF` that resolves to zero or more than one frame is an error; parsers MUST reject the delta rather than guess. The form `Δ[ref:frame_id | ...]` is **deprecated** in favor of the leading `#` form shown above; emitters targeting v0.1.1+ MUST use `Δ[#<id>|...]`.
 
 ---
 
