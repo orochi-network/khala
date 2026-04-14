@@ -120,6 +120,30 @@ Once installed, the skills fire automatically on matching phrasings (`read this 
 
 A complete, parseable context payload.
 
+### Before / after — a real system prompt
+
+A typical Markdown system prompt for a code assistant (`assistant.md`, ~72 tokens):
+
+```markdown
+You are a senior Python engineer. Be concise. Always use type hints,
+docstrings, and explicit error handling. Never use global variables,
+bare `except:`, or `print`-based debugging. When fixing bugs, explain
+the root cause first, then apply the minimal fix.
+```
+
+The same prompt as KCL (`assistant.kcl`, ~24 tokens — roughly 3× denser):
+
+```kcl
+§KCL_V0.1
+§ROLE[sr_dev:python]
+§STYLE[concise]
+§ALWAYS[type_hints, docstrings, error_handling]
+§NEVER[global_vars, bare_except, print_debug]
+§ON[trigger:bugfix, action:explain_root, then:minimal_fix]
+```
+
+Every behavioral constraint is preserved as a structured frame. `/khala:kcl-translate assistant.md` produces the KCL form; `/khala:kcl-translate assistant.kcl` expands it back.
+
 ---
 
 ## Authorship
