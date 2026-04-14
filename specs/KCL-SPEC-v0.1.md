@@ -848,6 +848,8 @@ For production deployments seeking maximum compression:
 
 A reproducible evaluation harness — public task suite, multi-model judges, NL-with-section-headers baseline, and per-metric confidence intervals — is planned for v0.2 and will be published as `specs/BENCHMARKS.md`.
 
+**On the adherence delta (+2.5%).** The claim that structured prompts improve instruction adherence is defensible in the prompt-engineering literature. However, the delta above is *equally consistent* with a **prompt-engineering confound**: a well-formatted KCL prompt outperforming a poorly-formatted NL baseline tells us nothing specific about KCL, only that structure beats prose. An honest test of the KCL-specific signal requires a third condition — "NL prose rewritten with section headers, role tags, and bullets but without KCL's symbol alphabet" — and shows KCL beating *that*, not just raw prose. Until such a control is reported, cite this figure as illustrative only and do not attribute the uplift to KCL's symbol choices.
+
 ---
 
 ## 16. Security Considerations
