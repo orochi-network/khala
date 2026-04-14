@@ -1,6 +1,6 @@
 ---
 name: kcl-write
-description: Encode knowledge, notes, or session context into a `.kcl` file. Use when the user asks you to "write KCL", "save this as KCL", "document this in KCL", "record knowledge in KCL", or produce a Khala Context Language payload from unstructured information.
+description: Encode knowledge, notes, session context, or a system prompt into a `.kcl` file (compresses context ~3-8×). Use when the user asks you to "compress my system prompt", "shrink this prompt", "encode as KCL", "write KCL", "save this as KCL", "document this in KCL", "record knowledge in KCL", "pack this into KCL", or produce a Khala Context Language payload from unstructured information.
 ---
 
 # kcl-write — Encode Knowledge as KCL
