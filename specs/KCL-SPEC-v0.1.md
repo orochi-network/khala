@@ -119,6 +119,27 @@ Subsequent messages encode only changes from prior state, using the delta operat
 
 A `REF` that resolves to zero or more than one frame is an error; parsers MUST reject the delta rather than guess. The form `Δ[ref:frame_id | ...]` is **deprecated** in favor of the leading `#` form shown above; emitters targeting v0.1.1+ MUST use `Δ[#<id>|...]`.
 
+**Worked example.**
+
+Turn 1 — declare a task frame with an explicit id:
+
+```kcl
+[TASK|
+  id:auth_flow,
+  action:implement,
+  target:OAuth2_flow,
+  priority:!
+]
+```
+
+Turn 3 — the scope widened and the deadline changed; emit a delta, not a full re-state:
+
+```kcl
+Δ[#auth_flow | priority:!→‼, ⊕target_sub:PKCE, ⊖deadline]
+```
+
+A parser resolves `#auth_flow` to the Turn-1 TASK frame by `id:` match, applies the three changes, and produces the updated state without re-encoding unchanged slots (`action`, `target`).
+
 ---
 
 ## 3. Formal Grammar
