@@ -160,10 +160,13 @@ COMPRESS_RULE ::= KEY ':' LEVEL
 LEVEL         ::= 'conservative' | 'standard' | 'aggressive'
 
 VALUE         ::= LITERAL | NUMBER | BOOL | LIST | FRAME | REF | SCALE | NULL
-LITERAL       ::= STRING (quoted or bare token)
+LITERAL       ::= BARE_TOKEN | QUOTED_STRING
+BARE_TOKEN    ::= [^:,\]\}\|"\s→][^:,\]\}\|"\s→]*   (* see tokenization rule below *)
+QUOTED_STRING ::= '"' ([^"\\] | '\\' .)* '"'
+NUMBER        ::= '-'? [0-9]+ ('.' [0-9]+)?
 LIST          ::= '[' VALUE (',' VALUE)* ']'
 REF           ::= '#' IDENTIFIER
-SCALE         ::= NUMBER_0_TO_1
+SCALE         ::= '0' ('.' [0-9]+)? | '1' ('.' '0'+)?   (* in [0,1] *)
 NULL          ::= '⊘'
 BOOL          ::= '⊤' | '⊥'    (* true / false *)
 
@@ -171,6 +174,8 @@ TAG           ::= IDENTIFIER
 KEY           ::= IDENTIFIER ('.' IDENTIFIER)*   (* dot-path nesting *)
 IDENTIFIER    ::= [a-zA-Z_][a-zA-Z0-9_]*
 ```
+
+**LITERAL tokenization rule (normative).** A bare token MUST NOT contain any of the delimiter characters `:` `,` `]` `}` `|` `→` `"` or ASCII whitespace. Any value that would contain one of these characters — including URLs, paths with colons (`C:\...`), version strings (`python:3.12`), framework specs (`FastAPI:0.104`), dimensions (`1920x1080`), or prose — MUST be wrapped in a `QUOTED_STRING`. Parsers encountering a `:` inside what would otherwise be a bare token MUST treat the token as malformed and require re-quoting, NOT attempt to disambiguate as a nested slot. Emitters SHOULD prefer quoted strings for any value containing non-alphanumeric characters beyond `.` `_` `-` `/`.
 
 ### 3.2 Reserved Symbols
 
