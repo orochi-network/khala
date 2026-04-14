@@ -280,7 +280,7 @@ Declares session-level metadata.
   session:a1b2c3,
   ts:2026-04-14T10:00:00Z,
   compress_level:standard,
-  history_depth:{full:5, summary:20, drop:∞}
+  history_depth:{full:5, summary:20, drop:all}
 }
 ```
 
@@ -548,7 +548,7 @@ Records decisions and their rationale for context.
 
 ### 7.2 Compression Strategy
 
-History depth is controlled by `§META{history_depth:{full:5, summary:20, drop:∞}}`.
+History depth is controlled by `§META{history_depth:{full:5, summary:20, drop:all}}`.
 
 | Zone | Age | Encoding | Fidelity |
 |------|-----|----------|----------|

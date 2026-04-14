@@ -155,7 +155,7 @@ Types: `str` `int` `num` `bool` `obj` `arr` `any` `enum[a,b]` — `?` = optional
     summary:"⟨T1-T8⟩ SUMMARY[compressed_slots]"∵lossy,
     full_turn:"⟨T9⟩ U:WANT[slots]"∵lossless
   ],
-  depth_config:"§META{history_depth:{full:N, summary:M, drop:∞}}",
+  depth_config:"§META{history_depth:{full:N, summary:M, drop:all}}",
   summary_rules:[
     preserve:[decisions,state_changes,unresolved_issues],
     drop:[pleasantries,acknowledgments,dead_ends],
