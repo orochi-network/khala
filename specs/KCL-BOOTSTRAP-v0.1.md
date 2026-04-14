@@ -12,8 +12,9 @@ File extension: `.kcl` · Code blocks: `kcl`
 ### Syntax
 
 Sections: `§NAME{...}` or `§NAME[...]`
+Fused-marker frames: `§TAG<marker>[slot:val]` — e.g. `§FACT✓[...]`, `§CLAIM~[...]`, `§DEPRECATED✗[...]`
 Frames: `[TAG|slot:val, slot:val]`
-Deltas: `Δ[ref|key:old→new, ⊕key:val, ⊖key]`
+Deltas: `Δ[#id|key:old→new, ⊕key:val, ⊖key]`
 Directives: `@cmd(args)`
 NL escape: `§NL["uncompressed text"]`
 
@@ -34,9 +35,10 @@ Priority: `‼` critical · `!` high · `·` normal · `…` low
 
 ```bnf
 HEADER := §META{} §TRUST{}? §ONTO{}? §TOOLS{}? (§USE id)*
-BODY   := FRAME | DELTA | DIRECTIVE | §CHECKPOINT{} | §NL[""] | §COMPRESS{}
+BODY   := FRAME | FUSED | DELTA | DIRECTIVE | §CHECKPOINT{} | §NL[""] | §COMPRESS{}
 FRAME  := '[' TAG '|' key:val, ... ']'
-DELTA  := 'Δ[' ref '|' changes ']'
+FUSED  := '§' TAG MARKER '[' key:val, ... ']'       (MARKER ∈ {✓,?,~,✗,◐})
+DELTA  := 'Δ[' '#' ID '|' changes ']'
 TOOLS  := §TOOLS{ name(p:type=default)→Return "desc" }
 ```
 
