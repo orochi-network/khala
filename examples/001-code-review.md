@@ -90,3 +90,6 @@ No issues found. Checked for bugs and CLAUDE.md compliance.
   - # sign after the file name
   - Line range format is L[start]-L[end]
   - Provide at least 1 line of context before and after, centered on the line you are commenting about (eg. if you are commenting about lines 5-6, you should link to `L4-7`)
+
+  ---
+  **Acknowledgment:** This workflow is based on content originally created by Anthropic and is licensed under the Apache License 2.0.

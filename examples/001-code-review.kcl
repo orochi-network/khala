@@ -1,5 +1,5 @@
 §KCL_V0.1 — Khala Context Language. Compact structured context for LLMs.
-§META{kcl:0.1, ts:2026-04-15}
+§META{kcl:0.1, ts:2026-04-15, attribution:"Anthropic", license:"Apache-2.0"}
 
 §TOOLS{
   gh_pr_view(pr:str)→str "View PR details/summary",
