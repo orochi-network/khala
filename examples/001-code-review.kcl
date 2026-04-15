@@ -1,0 +1,87 @@
+§KCL_V0.1 — Khala Context Language. Compact structured context for LLMs.
+§META{kcl:0.1, ts:2026-04-15}
+
+§TOOLS{
+  gh_pr_view(pr:str)→str "View PR details/summary",
+  gh_pr_diff(pr:str)→str "Get PR diff content",
+  gh_pr_comment(pr:str, body:str)→any "Post review comment",
+  gh_pr_list(repo:str, status:enum[open,closed,all])→[obj] "List PRs",
+  gh_issue_list(repo:str)→[obj] "List issues/comments",
+  gh_search(query:str)→[obj] "Search code/history"
+}
+
+[TASK|
+  id:pr_audit,
+  action:code_review,
+  target:pull_request,
+  parallel_agents:5,
+  confidence_threshold:80
+]
+
+§ON[
+  trigger:start,
+  action:[
+    @check_eligibility(criteria:[closed, draft, automated, simple, redone]),
+    @find_docs(pattern:"CLAUDE.md", scope:[root, modified_dirs]),
+    @summarize(target:pr_metadata)
+  ]
+]
+
+§ON[
+  trigger:eligible,
+  action:launch_parallel_reviews[
+    A1:[audit:CLAUDE.md_adherence],
+    A2:[scan:bugs, depth:shallow, filter:large_only, ignore:false_positives],
+    A3:[audit:git_history, context:[blame, commit_msg]],
+    A4:[audit:previous_prs, context:relevant_comments],
+    A5:[audit:inline_comments, context:compliance]
+  ]
+]
+
+§ON[
+  trigger:issues_found,
+  action:@score_confidence(
+    rubric:{
+      0:false_positive,
+      25:unverified_stylistic,
+      50:verified_minor/nitpick,
+      75:highly_confident/functional_impact,
+      100:absolute_certainty
+    },
+    constraints:[double_check_claude_md_cites]
+  ),
+  then:filter(score<80)
+]
+
+§STYLE[brief, technical, no_emojis]
+§ALWAYS[cite_code, full_sha1, line_range_format:"L[start]-L[end]", sha_context:±1_line]
+§NEVER[build_checks, typecheck_invocation, emojis, git_rev_parse_in_output]
+
+§NEVER[
+  report:pre_existing_issues,
+  report:non_bugs,
+  report:pedantic_nitpicks,
+  report:ci_catchable(lint, type, format),
+  report:general_quality_missing_docs,
+  report:silenced_via_ignore_comments,
+  report:intentional_functional_changes,
+  report:unmodified_lines
+]
+
+§ON[
+  trigger:completion,
+  action:[
+    @recheck_eligibility(),
+    @post_comment(body:template_review)
+  ]
+]
+
+§NL["
+### Code review format template:
+Found N issues:
+1. <desc> (Source says '<...>')
+<https://github.com/owner/repo/blob/[sha1]/[file]#L[start]-L[end]>
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+<sub>- If useful 👍, otherwise 👎</sub>
+"]

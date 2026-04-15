@@ -146,6 +146,14 @@ Every behavioral constraint is preserved as a structured frame. `/khala:kcl-tran
 
 ---
 
+## Examples
+
+The `examples/` directory contains real-world Markdown instructions translated into KCL to demonstrate complexity handling and compression:
+
+- **[001-code-review.kcl](examples/001-code-review.kcl)** ([source md](examples/001-code-review.md)) — A complex, multi-step PR audit workflow. Reduced from ~1,100 tokens to ~380 tokens (~65% compression) while preserving 100% of the procedural logic and formatting constraints.
+
+---
+
 ## Next steps
 
 1. **Install** the plugin using the commands above.
